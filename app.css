@@ -1,3 +1,20 @@
+/* Header actions row: align buttons side by side */
+.header-actions-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 8px;
+  margin-bottom: -8px;
+}
+/* Ensure header buttons are inline, not full width, except on mobile */
+.header-actions-row .btn,
+.header-actions-row .btn-primary {
+  width: auto;
+  min-width: 100px;
+}
+
 footer {
   margin-top: auto;
   background: var(--bg-header);
@@ -209,10 +226,8 @@ footer > div {
 }
 /* Theme toggle button */
 #theme-toggle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 16px 24px 0 0;
+  position: static;
+  margin: 0;
   padding: 8px 18px;
   border-radius: 8px;
   border: none;
@@ -283,6 +298,7 @@ body::before {
 .header {
   text-align: center;
   margin-top: 50px;
+  position: relative;
 }
 .header h1 {
   font-size: 48px;
