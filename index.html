@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="dark-theme">
+    <main style="flex: 1 0 auto; display: flex; flex-direction: column">
+      <div class="header">
+        <div class="header-actions-row">
+          <button id="theme-toggle">🌙 Dark mode</button>
+          <button id="sign-in-btn" class="btn btn-primary">Sign in</button>
+          <button
+            id="add-news-btn"
+            class="btn btn-primary"
+            style="display: none"
+          >
+            Add news
+          </button>
+        </div>
+        <h1 style="margin-top: 12px; margin-bottom: 12px">
+          Welcome to my news page
+        </h1>
+        <div class="main-content-wrapper">
+          <div class="header-row">
+            <div class="tabs">
+              <button class="tab-link active" data-tab="life">Life</button>
+              <button class="tab-link" data-tab="sports">Sports</button>
+              <button class="tab-link" data-tab="weather">Weather</button>
+              <button class="tab-link" data-tab="nature">Nature</button>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="tab-content">
+            <div class="tab-panel" id="tab-life">
+              <div class="life-news-grid">
+                <!-- Новости Life будут подгружаться сюда динамически -->
+              </div>
+            </div>
+            <div class="tab-panel" id="tab-sports" style="display: none">
+              <div class="life-news-grid">
+                <!-- Новости Sports будут подгружаться сюда динамически -->
+              </div>
+            </div>
+            <div class="tab-panel" id="tab-weather" style="display: none">
+              <div class="life-news-grid">
+                <!-- Новости Weather будут подгружаться сюда динамически -->
+              </div>
+            </div>
+            <div class="tab-panel" id="tab-nature" style="display: none">
+              <div class="life-news-grid">
+                <!-- Новости Nature будут подгружаться сюда динамически -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Модальные окна (SignIn, news) -->
+    <!--Modal windows (SignIn, news)-->
+    <div id="SignInModalOverlay" class="modal-overlay" style="display: none">
+      <div
+        id="SignInModal"
+        class="modal-window"
+        style="min-width: 320px; max-width: 95vw"
+      >
+        <button class="close-btn" onclick="closeSignInModal()" title="Close">
+          ×
+        </button>
+        <h2>Sign in</h2>
+        <form id="SignInForm" method="post" action="#">
+          <div class="form-group">
+            <input
+              type="email"
+              id="SignInEmail"
+              name="SignInEmail"
+              placeholder="Email"
+              required
+              style="width: 100%; padding: 8px; font-size: 16px"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="SignInPassword"
+              name="SignInPassword"
+              placeholder="Password"
+              required
+              style="width: 100%; padding: 8px; font-size: 16px"
+            />
+          </div>
+          <div
+            id="SignInError"
+            style="
+              color: red;
+              display: none;
+              margin-bottom: 8px;
+              font-size: 14px;
+            "
+          ></div>
+          <div
+            class="buttons"
+            style="display: flex; gap: 12px; align-items: center"
+          >
+            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeSignInModal()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--Модальное окно для добавления вопросов-->
+    <!--Modal window for adding questions-->
+
+    <div id="AddNewsOverlay" class="modal-overlay" style="display: none">
+      <div
+        id="AddModal"
+        class="modal-window"
+        style="min-width: 340px; max-width: 95vw"
+      >
+        <button class="close-btn" onclick="closeAddModal()" title="Close">
+          ×
+        </button>
+        <h2>Add news</h2>
+        <form id="AddForm" method="post" action="#">
+          <div class="form-group">
+            <label for="AddCategorySelect">Category:</label>
+            <select
+              id="AddCategorySelect"
+              name="AddCategorySelect"
+              required
+              style="width: 100%; padding: 8px; font-size: 16px"
+            >
+              <option value="">Select a category...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="AddNews"
+              name="AddNews"
+              placeholder="NewsLink"
+              required
+              style="width: 100%; padding: 8px; font-size: 16px"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="AddHead"
+              name="AddHead"
+              placeholder="News Head"
+              required
+              style="width: 100%; padding: 8px; font-size: 16px"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="AddDiscr"
+              name="AddDiscr"
+              placeholder="News Description"
+              required
+              style="width: 100%; padding: 8px; font-size: 16px"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="AddText"
+              name="AddText"
+              placeholder="News Text"
+              required
+              style="width: 100%; padding: 8px; font-size: 16px"
+            />
+          </div>
+          <div
+            id="AddError"
+            style="
+              color: red;
+              display: none;
+              margin-bottom: 8px;
+              font-size: 14px;
+            "
+          ></div>
+          <div
+            class="buttons"
+            style="display: flex; gap: 12px; align-items: center"
+          >
+            <button type="submit" class="btn btn-primary">Add</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeAddModal()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div class="divider"></div>
+      <div>
+        <p>© 2025 Inna Likhacheva</p>
+      </div>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
