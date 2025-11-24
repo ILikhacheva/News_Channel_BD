@@ -158,6 +158,13 @@ if (addForm) {
       addForm.reset();
       alert("News added!");
       closeAddModal();
+      // Immediately reload news for the selected category tab
+      const tabPanel = document.querySelector(
+        `#tab-${category.toLowerCase()} .life-news-grid`
+      );
+      if (tabPanel) {
+        loadAndRenderNews(category, tabPanel);
+      }
     } catch (e) {
       errorDiv.textContent = "Server error";
       errorDiv.style.display = "block";
@@ -231,9 +238,6 @@ async function loadAndRenderNews(categoryName, gridEl) {
   }
 }
 
-// Динамические вкладки и панели по категориям с загрузкой новостей
-
-// Запуск динамических вкладок при загрузке
 // При загрузке страницы сразу загружаем новости для всех четырёх категорий
 window.addEventListener("DOMContentLoaded", () => {
   ["Life", "Sports", "Weather", "Nature"].forEach((cat) => {
