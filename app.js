@@ -206,7 +206,7 @@ async function loadAndRenderNews(categoryName, gridEl) {
     );
     const news = await res.json();
     if (!Array.isArray(news) || news.length === 0) {
-      gridEl.innerHTML = '<div style="color:gray">Нет новостей</div>';
+      gridEl.innerHTML = '<div style="color:gray">No news</div>';
       return;
     }
     gridEl.innerHTML = "";
@@ -214,6 +214,9 @@ async function loadAndRenderNews(categoryName, gridEl) {
       const card = document.createElement("div");
       card.className = "life-news-card";
       card.innerHTML = `
+        <img class="life-news-img" src="${
+          item.news_link || ""
+        }" alt="News image" onerror="this.style.display='none'" />
         <div class="life-news-title">${item.news_head || ""}</div>
         <div class="life-news-desc">${item.news_discr || ""}</div>
         <div class="full-text" style="display:none">${
