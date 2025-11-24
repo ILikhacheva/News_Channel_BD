@@ -1,3 +1,36 @@
+.modal-window {
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  z-index: 10;
+}
+.close-btn:hover {
+  color: #222;
+}
+.modal-window h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+/* Input fields in modal windows */
+.modal-window input[type="email"],
+.modal-window input[type="password"],
+.modal-window input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
 /* Center modal overlay and window */
 .modal-overlay {
   position: fixed;
