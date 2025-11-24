@@ -1,10 +1,3 @@
-// ---
-// НАСТРОЙКА ПОДКЛЮЧЕНИЯ К БАЗЕ ДАННЫХ
-// DATABASE CONNECTION SETUP
-// ---
-// Загружаем переменные окружения из .env файла
-// Load environment variables from .env file
-
 // Загрузка переменных окружения из .env
 // Loading environment variables from .env
 require("dotenv").config();
@@ -97,8 +90,8 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Добавить вопрос с категорией и ответами
-// Add question with category and answers (POST /add-question-full)
+// Добавить новость с категорией и описанием
+// Add news with category and description (POST /add-news-full)
 app.post("/add-news-full", async (req, res) => {
   const { category, news_link, news_head, news_discr, news_text } = req.body;
   if (!news_link || !news_head || !news_discr || !news_text) {
@@ -108,6 +101,7 @@ app.post("/add-news-full", async (req, res) => {
   try {
     await client.query("BEGIN");
     // Найти id выбранной категории
+    // Find the id of the selected category
     const catRes = await client.query(
       "SELECT category_id FROM categories WHERE category_name = $1",
       [category]
@@ -115,6 +109,7 @@ app.post("/add-news-full", async (req, res) => {
     if (catRes.rows.length === 0) throw new Error("Category not found");
     const categoryId = catRes.rows[0].category_id;
     // Вставляем новость
+    // Insert the news
     const insQ = await client.query(
       "INSERT INTO news (news_link, news_head, news_discr, news_text, category_id) VALUES ($1, $2, $3, $4, $5) RETURNING news_id",
       [news_link, news_head, news_discr, news_text, categoryId]
@@ -149,6 +144,7 @@ app.get("/news", async (req, res) => {
     }
     const categoryId = catRes.rows[0].category_id;
     // Получаем новости этой категории
+    // Get news of this category
     const newsRes = await pool.query(
       `SELECT news_id, news_link, news_head, news_discr, news_text, category_id
        FROM news WHERE category_id = $1 ORDER BY news_id DESC`,

@@ -1,5 +1,3 @@
-// --- Minimal News App Logic ---
-
 // User state
 window.newsState = window.newsState || {};
 
@@ -115,7 +113,6 @@ updateAddNewsButton();
 // Add news form submit
 const addForm = document.getElementById("AddForm");
 const addCategorySelect = document.getElementById("AddCategorySelect");
-const addCategoryNew = document.getElementById("AddCategoryNew");
 if (addForm) {
   addForm.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -171,17 +168,7 @@ if (addForm) {
     }
   });
 }
-if (addCategorySelect) {
-  addCategorySelect.addEventListener("change", function () {
-    if (addCategorySelect.value === "__new__") {
-      addCategoryNew.style.display = "block";
-      addCategoryNew.required = true;
-    } else {
-      addCategoryNew.style.display = "none";
-      addCategoryNew.required = false;
-    }
-  });
-}
+
 // Load categories for add form
 async function loadCategoriesForAddForm() {
   if (!addCategorySelect) return;
@@ -204,6 +191,7 @@ if (addNewsBtn) {
 }
 
 // Загрузка и рендер новостей по категории
+// Load and render news by category
 async function loadAndRenderNews(categoryName, gridEl) {
   if (!gridEl) return;
   gridEl.innerHTML = '<div style="color:gray">Загрузка...</div>';
@@ -239,6 +227,7 @@ async function loadAndRenderNews(categoryName, gridEl) {
 }
 
 // При загрузке страницы сразу загружаем новости для всех четырёх категорий
+// On page load, load news for all four categories
 window.addEventListener("DOMContentLoaded", () => {
   ["Life", "Sports", "Weather", "Nature"].forEach((cat) => {
     const gridEl = document.querySelector(
@@ -249,6 +238,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
   // Оставляем только логику переключения вкладок
+  // Keep only tab switching logic
   const tabsContainer = document.querySelector(".tabs");
   const tabContent = document.querySelector(".tab-content");
   if (tabsContainer && tabContent) {
