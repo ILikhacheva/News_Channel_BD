@@ -1,3 +1,28 @@
+/* Center modal overlay and window */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+}
+.modal-overlay[style*="display: flex"] {
+  display: flex !important;
+}
+.modal-window {
+  margin: auto;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+  border-radius: 12px;
+  background: var(--bg-main);
+  min-width: 380px;
+  max-width: 98vw;
+  padding: 32px 28px;
+}
 /* Header actions row: align buttons side by side */
 .header-actions-row {
   display: flex;

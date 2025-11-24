@@ -232,10 +232,11 @@ async function loadAndRenderNews(categoryName, gridEl) {
 }
 
 // Динамические вкладки и панели по категориям с загрузкой новостей
-function renderTabsFromCategories() {
-  // Hardcoded categories
-  const categories = ["Life", "Sports", "Weather", "Nature"];
-  categories.forEach((cat) => {
+
+// Запуск динамических вкладок при загрузке
+// При загрузке страницы сразу загружаем новости для всех четырёх категорий
+window.addEventListener("DOMContentLoaded", () => {
+  ["Life", "Sports", "Weather", "Nature"].forEach((cat) => {
     const gridEl = document.querySelector(
       `#tab-${cat.toLowerCase()} .life-news-grid`
     );
@@ -243,12 +244,7 @@ function renderTabsFromCategories() {
       loadAndRenderNews(cat, gridEl);
     }
   });
-}
-
-// Запуск динамических вкладок при загрузке
-window.addEventListener("DOMContentLoaded", () => {
-  renderTabsFromCategories();
-  // Tab switching logic for static tabs
+  // Оставляем только логику переключения вкладок
   const tabsContainer = document.querySelector(".tabs");
   const tabContent = document.querySelector(".tab-content");
   if (tabsContainer && tabContent) {
